@@ -496,7 +496,15 @@ contract BNFT is IBNFT, ERC721EnumerableUpgradeable, IERC721ReceiverUpgradeable,
   }
 
   function setDelegateCashForTokenV2(uint256[] calldata tokenIds, bool value) public override nonReentrant {
-    _setDelegateCashForTokenV2(_msgSender(), tokenIds, value);
+    _setDelegateCashForTokenV2(_msgSender(), tokenIds, "", value);
+  }
+
+  function setDelegateCashForTokenV2WithRights(
+    uint256[] calldata tokenIds,
+    bytes32 rights,
+    bool value
+  ) public override nonReentrant {
+    _setDelegateCashForTokenV2(_msgSender(), tokenIds, rights, value);
   }
 
   function setDelegateCashForTokenV2(
@@ -504,12 +512,22 @@ contract BNFT is IBNFT, ERC721EnumerableUpgradeable, IERC721ReceiverUpgradeable,
     uint256[] calldata tokenIds,
     bool value
   ) public override nonReentrant {
-    _setDelegateCashForTokenV2(delegate, tokenIds, value);
+    _setDelegateCashForTokenV2(delegate, tokenIds, "", value);
+  }
+
+  function setDelegateCashForTokenV2WithRights(
+    address delegate,
+    uint256[] calldata tokenIds,
+    bytes32 rights,
+    bool value
+  ) public override nonReentrant {
+    _setDelegateCashForTokenV2(delegate, tokenIds, rights, value);
   }
 
   function _setDelegateCashForTokenV2(
     address delegate,
     uint256[] calldata tokenIds,
+    bytes32 rights,
     bool value
   ) internal {
     require(delegate != address(0), "BNFT: delegate is the zero address");
@@ -521,7 +539,7 @@ contract BNFT is IBNFT, ERC721EnumerableUpgradeable, IERC721ReceiverUpgradeable,
       address tokenOwner = ERC721Upgradeable.ownerOf(tokenIds[i]);
       require(tokenOwner == _msgSender(), "BNFT: caller is not owner");
 
-      delegateContractV2.delegateERC721(delegate, _underlyingAsset, tokenIds[i], "", value);
+      delegateContractV2.delegateERC721(delegate, _underlyingAsset, tokenIds[i], rights, value);
     }
   }
 
