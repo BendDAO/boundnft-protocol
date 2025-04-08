@@ -126,13 +126,10 @@ contract BNFTRegistry is IBNFTRegistry, Initializable, OwnableUpgradeable {
   /**
    * @dev See {IBNFTRegistry-createBNFTWithImpl}.
    */
-  function createBNFTWithImpl(address nftAsset, address bNftImpl)
-    external
-    override
-    nonReentrant
-    onlyOwner
-    returns (address bNftProxy)
-  {
+  function createBNFTWithImpl(
+    address nftAsset,
+    address bNftImpl
+  ) external override nonReentrant onlyOwner returns (address bNftProxy) {
     _requireAddressIsERC721(nftAsset);
     require(bNftImpl != address(0), "BNFTR: implement is zero address");
     require(bNftProxys[nftAsset] == address(0), "BNFTR: asset exist");
@@ -153,11 +150,7 @@ contract BNFTRegistry is IBNFTRegistry, Initializable, OwnableUpgradeable {
     _upgradeBNFTWithImpl(nftAsset, bNftImpl, encodedCallData);
   }
 
-  function _upgradeBNFTWithImpl(
-    address nftAsset,
-    address bNftImpl,
-    bytes memory encodedCallData
-  ) internal {
+  function _upgradeBNFTWithImpl(address nftAsset, address bNftImpl, bytes memory encodedCallData) internal {
     address bNftProxy = bNftProxys[nftAsset];
     require(bNftProxy != address(0), "BNFTR: asset nonexist");
 
@@ -191,12 +184,10 @@ contract BNFTRegistry is IBNFTRegistry, Initializable, OwnableUpgradeable {
   /**
    * @dev See {IBNFTRegistry-addCustomeSymbols}.
    */
-  function addCustomeSymbols(address[] memory nftAssets_, string[] memory symbols_)
-    external
-    override
-    nonReentrant
-    onlyOwner
-  {
+  function addCustomeSymbols(
+    address[] memory nftAssets_,
+    string[] memory symbols_
+  ) external override nonReentrant onlyOwner {
     require(nftAssets_.length == symbols_.length, "BNFTR: inconsistent parameters");
 
     for (uint256 i = 0; i < nftAssets_.length; i++) {

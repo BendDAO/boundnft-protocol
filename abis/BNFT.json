@@ -633,8 +633,13 @@
     "outputs": [
       {
         "internalType": "address[][]",
-        "name": "",
+        "name": "delegateAddrs",
         "type": "address[][]"
+      },
+      {
+        "internalType": "bytes32[][]",
+        "name": "delegateRights",
+        "type": "bytes32[][]"
       }
     ],
     "stateMutability": "view",

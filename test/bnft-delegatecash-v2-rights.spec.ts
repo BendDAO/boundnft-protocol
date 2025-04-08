@@ -93,7 +93,7 @@ makeSuite("BNFT: Delegate Cash V2 with Rights", (testEnv: TestEnv) => {
         )
     );
 
-    const delegateAddrs = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
+    const { delegateAddrs } = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
     const delegateAddrs1 = delegateAddrs[0];
     const delegateAddrs2 = delegateAddrs[1];
     expect(delegateAddrs1.length).to.be.equal(2);
@@ -129,7 +129,7 @@ makeSuite("BNFT: Delegate Cash V2 with Rights", (testEnv: TestEnv) => {
         )
     );
 
-    const delegateAddrs = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
+    const { delegateAddrs } = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
     const delegateAddrs1 = delegateAddrs[0];
     const delegateAddrs2 = delegateAddrs[1];
 
@@ -158,7 +158,7 @@ makeSuite("BNFT: Delegate Cash V2 with Rights", (testEnv: TestEnv) => {
     );
     await waitForTx(await mockMinterInstance.connect(user0.signer).burn(cachedTokenId2));
 
-    const delegateAddrs = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
+    const { delegateAddrs } = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
     const delegateAddrs1 = delegateAddrs[0];
     const delegateAddrs2 = delegateAddrs[1];
 
@@ -180,7 +180,7 @@ makeSuite("BNFT: Delegate Cash V2 with Rights", (testEnv: TestEnv) => {
       await mockMinterInstance.connect(testEnv.users[0].signer).mint(testEnv.users[0].address, cachedTokenId2)
     );
 
-    const delegateAddrs = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
+    const { delegateAddrs } = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
     const delegateAddrs2 = delegateAddrs[1];
 
     expect(delegateAddrs2.length).to.be.equal(2);
