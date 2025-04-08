@@ -24,7 +24,7 @@ jobs:
           scope: '@benddao'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT_PACKAGES_REGISTRY_READ_ONLY }}
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
