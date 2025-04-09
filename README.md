@@ -1,5 +1,5 @@
-[![Build pass](https://github.com/boundnft/boundnft-protocol/actions/workflows/node.js.yml/badge.svg)](https://github.com/boundnft/boundnft-protocol/actions/workflows/node.js.yml)
-[![codecov](https://codecov.io/gh/boundnft/boundnft-protocol/branch/main/graph/badge.svg?token=DD4QGDBBN1)](https://codecov.io/gh/boundnft/boundnft-protocol)
+[![Build](https://github.com/BendDAO/boundnft-protocol/actions/workflows/node.js.yml/badge.svg)](https://github.com/BendDAO/boundnft-protocol/actions/workflows/node.js.yml)
+[![codecov](https://codecov.io/gh/BendDAO/boundnft-protocol/graph/badge.svg?token=V3Y3Zhugt6)](https://codecov.io/gh/BendDAO/boundnft-protocol)
 
 ```
 ######                              #     # ####### ####### 
