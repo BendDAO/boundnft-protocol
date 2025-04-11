@@ -21,6 +21,8 @@ deployed-contracts.json
 !/deployments/deployed-contracts-goerli*.json
 !/deployments/deployed-contracts-develop*.json
 !/deployments/deployed-contracts-sepolia*.json
+!/deployments/deployed-contracts-curtis*.json
+!/deployments/deployed-contracts-apechain*.json
 
 /flattened
 bnft-flattened.zip

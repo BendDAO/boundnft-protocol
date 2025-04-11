@@ -1,0 +1,21 @@
+{
+  "ProxyAdmin": {
+    "address": "0x446AB941FFBc867740B55Ec084f4c802B979dCF9",
+    "deployer": "0x868964fa49a6fd6e116FE82c8f4165904406f479"
+  },
+  "ProxyAdminWithoutTimelock": {
+    "address": "0x98118d1cfFCf7C3E26b41aE29B761f2bC3c0eA0f",
+    "deployer": "0x868964fa49a6fd6e116FE82c8f4165904406f479"
+  },
+  "BNFT": {
+    "address": "0xb60D6F8e466E801BBF4A2eC08e0614De063d701d",
+    "deployer": "0x868964fa49a6fd6e116FE82c8f4165904406f479"
+  },
+  "BNFTRegistryImpl": {
+    "address": "0xAd36eb917Eeb957c90b577B7051D0C9BE930a1F8"
+  },
+  "BNFTRegistry": {
+    "address": "0xcAbe4E00a44Ff38990A42f43312d470DE5796FA6",
+    "deployer": "0x868964fa49a6fd6e116FE82c8f4165904406f479"
+  }
+}

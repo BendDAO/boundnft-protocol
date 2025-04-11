@@ -52,6 +52,24 @@ export const BendConfig: IBendConfiguration = {
       CLONEX: '0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b',
       AZUKI: '0xed5af388653567af2f388e6224dc7c4b3241c544',
     },
+    [eEthereumNetwork.apechain]: {
+      WPUNKS: '',
+      BAYC: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+      DOODLE: '',
+      SDOODLE: '',
+      MAYC: '',
+      CLONEX: '',
+      AZUKI: '',
+    },
+    [eEthereumNetwork.curtis]: {
+      WPUNKS: '',
+      BAYC: '0xE15A78992dd4a9d6833eA7C9643650d3b0a2eD2B',
+      DOODLE: '',
+      SDOODLE: '',
+      MAYC: '0x28cCcd47Aa3FFb42D77e395Fba7cdAcCeA884d5A',
+      CLONEX: '',
+      AZUKI: '',
+    },
   },
 };
 

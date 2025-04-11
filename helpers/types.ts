@@ -14,6 +14,8 @@ export enum eEthereumNetwork {
   coverage = "coverage",
   hardhat = "hardhat",
   localhost = "localhost",
+  curtis = "curtis",
+  apechain = "apechain",
 }
 
 export enum BendPools {
@@ -102,6 +104,8 @@ export interface iEthereumParamsPerNetwork<T> {
   [eEthereumNetwork.main]: T;
   [eEthereumNetwork.hardhat]: T;
   [eEthereumNetwork.localhost]: T;
+  [eEthereumNetwork.curtis]: T;
+  [eEthereumNetwork.apechain]: T;
 }
 
 export interface iParamsPerPool<T> {

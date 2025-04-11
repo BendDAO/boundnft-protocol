@@ -17,7 +17,7 @@ import "hardhat-gas-reporter";
 import "solidity-coverage";
 import { fork } from "child_process";
 import "@nomiclabs/hardhat-solhint";
-require('hardhat-storage-layout-diff');
+require("hardhat-storage-layout-diff");
 
 const SKIP_LOAD = process.env.SKIP_LOAD === "true";
 const DEFAULT_BLOCK_GAS_LIMIT = 12450000;
@@ -51,13 +51,13 @@ const getCommonNetworkConfig = (networkName: eNetwork, networkId: number) => ({
   //gasPrice: NETWORKS_DEFAULT_GAS[networkName],
   chainId: networkId,
   accounts: PRIVATE_KEY
-  ? [PRIVATE_KEY]
-  : {
-    mnemonic: MNEMONIC,
-    path: MNEMONIC_PATH,
-    initialIndex: 0,
-    count: 20,
-  },
+    ? [PRIVATE_KEY]
+    : {
+        mnemonic: MNEMONIC,
+        path: MNEMONIC_PATH,
+        initialIndex: 0,
+        count: 20,
+      },
 });
 
 const buidlerConfig: HardhatUserConfig = {
@@ -86,7 +86,28 @@ const buidlerConfig: HardhatUserConfig = {
     target: "ethers-v5",
   },
   etherscan: {
-    apiKey: ETHERSCAN_KEY,
+    apiKey: {
+      curtis: ETHERSCAN_KEY,
+      apechain: ETHERSCAN_KEY,
+    },
+    customChains: [
+      {
+        network: "apechain",
+        chainId: 33139,
+        urls: {
+          apiURL: "https://api.apescan.io/api",
+          browserURL: "https://apescan.io",
+        },
+      },
+      {
+        network: "curtis",
+        chainId: 33111,
+        urls: {
+          apiURL: "https://curtis.explorer.caldera.xyz/api",
+          browserURL: "https://curtis.explorer.caldera.xyz/",
+        },
+      },
+    ],
   },
   mocha: {
     timeout: 0,
@@ -99,12 +120,14 @@ const buidlerConfig: HardhatUserConfig = {
     localhost: {
       url: "http://localhost:8545",
       chainId: BUIDLEREVM_CHAINID,
-      accounts: accounts.map(({ secretKey, balance }: { secretKey: string; balance: string }) => (secretKey)),
+      accounts: accounts.map(({ secretKey, balance }: { secretKey: string; balance: string }) => secretKey),
     },
     sepolia: getCommonNetworkConfig(eEthereumNetwork.sepolia, 11155111),
     goerli: getCommonNetworkConfig(eEthereumNetwork.goerli, 5),
     rinkeby: getCommonNetworkConfig(eEthereumNetwork.rinkeby, 4),
     main: getCommonNetworkConfig(eEthereumNetwork.main, 1),
+    curtis: getCommonNetworkConfig(eEthereumNetwork.curtis, 33111),
+    apechain: getCommonNetworkConfig(eEthereumNetwork.apechain, 33139),
     hardhat: {
       hardfork: "berlin",
       blockGasLimit: DEFAULT_BLOCK_GAS_LIMIT,

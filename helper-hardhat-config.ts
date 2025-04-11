@@ -41,16 +41,20 @@ export const NETWORKS_RPC_URL: iParamsPerNetwork<string> = {
   [eEthereumNetwork.coverage]: "http://localhost:8555",
   [eEthereumNetwork.hardhat]: "http://localhost:8545",
   [eEthereumNetwork.localhost]: "http://localhost:8545",
+  [eEthereumNetwork.apechain]: "https://rpc.apechain.com/http",
+  [eEthereumNetwork.curtis]: "https://curtis.rpc.caldera.xyz/http",
 };
 
 export const NETWORKS_DEFAULT_GAS: iParamsPerNetwork<number> = {
-  [eEthereumNetwork.sepolia]: 35 * GWEI,
+  [eEthereumNetwork.sepolia]: 1 * GWEI,
   [eEthereumNetwork.goerli]: 35 * GWEI,
   [eEthereumNetwork.rinkeby]: 35 * GWEI,
-  [eEthereumNetwork.main]: 35 * GWEI,
+  [eEthereumNetwork.main]: 1 * GWEI,
   [eEthereumNetwork.coverage]: 35 * GWEI,
   [eEthereumNetwork.hardhat]: 35 * GWEI,
   [eEthereumNetwork.localhost]: 35 * GWEI,
+  [eEthereumNetwork.curtis]: 1 * GWEI,
+  [eEthereumNetwork.apechain]: 1 * GWEI,
 };
 
 export const BLOCK_TO_FORK: iParamsPerNetwork<number | undefined> = {
@@ -61,4 +65,6 @@ export const BLOCK_TO_FORK: iParamsPerNetwork<number | undefined> = {
   [eEthereumNetwork.coverage]: 0,
   [eEthereumNetwork.hardhat]: 0,
   [eEthereumNetwork.localhost]: 0,
+  [eEthereumNetwork.curtis]: 0,
+  [eEthereumNetwork.apechain]: 0,
 };
