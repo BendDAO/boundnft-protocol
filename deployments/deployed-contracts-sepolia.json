@@ -48,7 +48,7 @@
     "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
   },
   "BNFT": {
-    "address": "0xe5B57C193f4638E7DefDBB1F0Cc720D4B736ED61",
+    "address": "0x87C5d6ADAf7D968E4B0157Dda3DA88477F5A7E67",
     "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
   },
   "BNFTRegistryImpl": {

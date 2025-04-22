@@ -107,11 +107,7 @@ interface IBNFT {
    * @param nftTokenIds token ids of the underlying asset
    * @param params Variadic packed params to pass to the receiver as extra information
    */
-  function flashLoan(
-    address receiverAddress,
-    uint256[] calldata nftTokenIds,
-    bytes calldata params
-  ) external;
+  function flashLoan(address receiverAddress, uint256[] calldata nftTokenIds, bytes calldata params) external;
 
   /**
    * @dev Approve or remove the flash loan `operator` as an operator for the minter.
@@ -130,20 +126,12 @@ interface IBNFT {
    * Operators can call {flashLoan} for any token minted by the minter.
    *
    */
-  function setFlashLoanLocking(
-    uint256 tokenId,
-    address operator,
-    bool locked
-  ) external;
+  function setFlashLoanLocking(uint256 tokenId, address operator, bool locked) external;
 
   /**
    * @dev Returns if the `operator` is allowed to call flash loan of the assets of `minter`.
    */
-  function isFlashLoanLocked(
-    uint256 tokenId,
-    address minter,
-    address operator
-  ) external view returns (bool);
+  function isFlashLoanLocked(uint256 tokenId, address minter, address operator) external view returns (bool);
 
   function getFlashLoanLocked(uint256 tokenId, address minter) external view returns (address[] memory);
 
@@ -153,37 +141,32 @@ interface IBNFT {
 
   function setDelegateCashForToken(uint256[] calldata tokenIds, bool value) external;
 
-  function setDelegateCashForToken(
-    address delegate,
-    uint256[] calldata tokenIds,
-    bool value
-  ) external;
+  function setDelegateCashForToken(address delegate, uint256[] calldata tokenIds, bool value) external;
 
   // V2 Delegate Cash
 
-  function getDelegateCashForTokenV2(uint256[] calldata tokenIds) external view returns (address[][] memory);
+  function getDelegateCashForTokenV2(
+    uint256[] calldata tokenIds
+  ) external view returns (address[][] memory delegates, bytes32[][] memory rights);
+
+  function setDelegateCashForTokenV2WithRights(uint256[] calldata tokenIds, bytes32 rights, bool value) external;
 
   function setDelegateCashForTokenV2(uint256[] calldata tokenIds, bool value) external;
 
-  function setDelegateCashForTokenV2(
+  function setDelegateCashForTokenV2(address delegate, uint256[] calldata tokenIds, bool value) external;
+
+  function setDelegateCashForTokenV2WithRights(
     address delegate,
     uint256[] calldata tokenIds,
+    bytes32 rights,
     bool value
   ) external;
 
   // Airdrop
 
-  function claimERC20Airdrop(
-    address token,
-    address to,
-    uint256 amount
-  ) external;
+  function claimERC20Airdrop(address token, address to, uint256 amount) external;
 
-  function claimERC721Airdrop(
-    address token,
-    address to,
-    uint256[] calldata ids
-  ) external;
+  function claimERC721Airdrop(address token, address to, uint256[] calldata ids) external;
 
   function claimERC1155Airdrop(
     address token,

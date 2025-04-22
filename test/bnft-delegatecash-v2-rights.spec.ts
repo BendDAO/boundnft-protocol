@@ -5,17 +5,21 @@ import { MockBNFTMinter, MockDelegationRegistryV2, MockDelegationRegistryV2Facto
 import { waitForTx } from "../helpers/misc-utils";
 import { ZERO_ADDRESS } from "../helpers/constants";
 import { getBNFT, getDeploySigner } from "../helpers/contracts-getters";
+import { arrayify } from "ethers/lib/utils";
 
 const { expect } = require("chai");
 
-makeSuite("BNFT: Delegate Cash V2", (testEnv: TestEnv) => {
+makeSuite("BNFT: Delegate Cash V2 with Rights", (testEnv: TestEnv) => {
   let mockDelegateCashV2: MockDelegationRegistryV2;
   let mockMinterInstance: MockBNFTMinter;
 
   let cachedTokenId1: string;
   let cachedTokenId2: string;
+  let testRights: Uint8Array;
 
   before(async () => {
+    testRights = arrayify("0x000000000000000000000000000000000000000000000000000000ffffffffff");
+
     mockDelegateCashV2 = await new MockDelegationRegistryV2Factory(await getDeploySigner()).deploy();
     await testEnv.bnftRegistry.connect(await getDeploySigner()).setDelegateCashContractV2(mockDelegateCashV2.address);
     mockMinterInstance = await deployMockBNFTMinter([testEnv.bayc.address, testEnv.bBAYC.address]);
@@ -38,7 +42,9 @@ makeSuite("BNFT: Delegate Cash V2", (testEnv: TestEnv) => {
     const user5 = users[5];
 
     await expect(
-      bBAYC.connect(user5.signer)["setDelegateCashForTokenV2(uint256[],bool)"]([cachedTokenId1], true)
+      bBAYC
+        .connect(user5.signer)
+        ["setDelegateCashForTokenV2WithRights(uint256[],bytes32,bool)"]([cachedTokenId1], testRights, true)
     ).to.be.revertedWith("BNFT: caller is not owner");
   });
 
@@ -50,24 +56,41 @@ makeSuite("BNFT: Delegate Cash V2", (testEnv: TestEnv) => {
 
     // user0 and user2 for token 1
     await waitForTx(
-      await bBAYC.connect(user0.signer)["setDelegateCashForTokenV2(uint256[],bool)"]([cachedTokenId1], true)
+      await bBAYC
+        .connect(user0.signer)
+        ["setDelegateCashForTokenV2WithRights(uint256[],bytes32,bool)"]([cachedTokenId1], testRights, true)
     );
     await waitForTx(
       await bBAYC
         .connect(user0.signer)
-        ["setDelegateCashForTokenV2(address,uint256[],bool)"](user2.address, [cachedTokenId1], true)
+        ["setDelegateCashForTokenV2WithRights(address,uint256[],bytes32,bool)"](
+          user2.address,
+          [cachedTokenId1],
+          testRights,
+          true
+        )
     );
 
     // user1 and user2 for token 2
     await waitForTx(
       await bBAYC
         .connect(user0.signer)
-        ["setDelegateCashForTokenV2(address,uint256[],bool)"](user1.address, [cachedTokenId2], true)
+        ["setDelegateCashForTokenV2WithRights(address,uint256[],bytes32,bool)"](
+          user1.address,
+          [cachedTokenId2],
+          testRights,
+          true
+        )
     );
     await waitForTx(
       await bBAYC
         .connect(user0.signer)
-        ["setDelegateCashForTokenV2(address,uint256[],bool)"](user2.address, [cachedTokenId2], true)
+        ["setDelegateCashForTokenV2WithRights(address,uint256[],bytes32,bool)"](
+          user2.address,
+          [cachedTokenId2],
+          testRights,
+          true
+        )
     );
 
     const { delegateAddrs } = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
@@ -90,13 +113,20 @@ makeSuite("BNFT: Delegate Cash V2", (testEnv: TestEnv) => {
 
     // user0 for token 1
     await waitForTx(
-      await bBAYC.connect(user0.signer)["setDelegateCashForTokenV2(uint256[],bool)"]([cachedTokenId1], false)
+      await bBAYC
+        .connect(user0.signer)
+        ["setDelegateCashForTokenV2WithRights(uint256[],bytes32,bool)"]([cachedTokenId1], testRights, false)
     );
     // user2 for token 2
     await waitForTx(
       await bBAYC
         .connect(user0.signer)
-        ["setDelegateCashForTokenV2(address,uint256[],bool)"](user2.address, [cachedTokenId2], false)
+        ["setDelegateCashForTokenV2WithRights(address,uint256[],bytes32,bool)"](
+          user2.address,
+          [cachedTokenId2],
+          testRights,
+          false
+        )
     );
 
     const { delegateAddrs } = await bBAYC.getDelegateCashForTokenV2([cachedTokenId1, cachedTokenId2]);
@@ -119,7 +149,12 @@ makeSuite("BNFT: Delegate Cash V2", (testEnv: TestEnv) => {
     await waitForTx(
       await bBAYC
         .connect(user0.signer)
-        ["setDelegateCashForTokenV2(address,uint256[],bool)"](user2.address, [cachedTokenId2], true)
+        ["setDelegateCashForTokenV2WithRights(address,uint256[],bytes32,bool)"](
+          user2.address,
+          [cachedTokenId2],
+          testRights,
+          true
+        )
     );
     await waitForTx(await mockMinterInstance.connect(user0.signer).burn(cachedTokenId2));
 

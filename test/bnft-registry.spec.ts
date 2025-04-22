@@ -120,7 +120,7 @@ makeSuite("BNFTRegistry", (testEnv: TestEnv) => {
     const testNftAsset = await deployMintableERC721(["testNftAsset", "TNFT"]);
 
     const testBNFTImplNew = await deployGenericBNFTImpl(false);
-    bnftRegistry.setBNFTGenericImpl(testBNFTImplNew.address);
+    await bnftRegistry.setBNFTGenericImpl(testBNFTImplNew.address);
 
     await waitForTx(await bnftRegistry.createBNFT(testNftAsset.address));
 
@@ -142,7 +142,7 @@ makeSuite("BNFTRegistry", (testEnv: TestEnv) => {
     await waitForTx(await bnftRegistry.addCustomeSymbols([testNftAsset.address], ["CTNFT"]));
 
     const testBNFTImplNew = await deployGenericBNFTImpl(false);
-    bnftRegistry.setBNFTGenericImpl(testBNFTImplNew.address);
+    await bnftRegistry.setBNFTGenericImpl(testBNFTImplNew.address);
 
     await waitForTx(await bnftRegistry.createBNFT(testNftAsset.address));
 

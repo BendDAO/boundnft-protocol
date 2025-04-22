@@ -28,10 +28,6 @@ fi
 mkdir -p temp-artifacts
 cp -r artifacts/* temp-artifacts
 
-# Import external @boundnft/deploy artifacts
-mkdir -p temp-artifacts/boundnft-deploy
-cp -r node_modules/@boundnft/boundnft-deploy/artifacts/contracts/* temp-artifacts/deploy
-
 # Export MARKET_NAME variable to use Bend market as testnet deployment setup
 export MARKET_NAME="Test"
 export ENABLE_REWARDS="false"
